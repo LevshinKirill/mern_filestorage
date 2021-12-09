@@ -12,9 +12,11 @@ const CreateLinkComponent = () => {
   const createLinkHandler = async (e) => {
     e.preventDefault()
     try {
-      const fetched = await request(`http://localhost:8000/api/link/create`, 'POST', {
-        files: acceptedFiles
-      }, {})
+      const formData = new FormData()
+      acceptedFiles.forEach(file => {
+        formData.append('files', file)
+      })
+      const fetched = await request(`http://localhost:8000/api/link/create`, 'POST', formData, {})
       if (fetched.message) {
         toast(fetched.message)
       }
@@ -39,7 +41,7 @@ const CreateLinkComponent = () => {
           </form>
           <div className='col-xl-6 p-3'>
             <h2>Simple, private file sharing</h2>
-            <p>The app lets you share files with a link that automatically expries.<strong> To share your files you need drop your files to the drop zone and click to upload button.</strong> </p>
+            <p>The app lets you share files with a link that automatically expires.<strong> To share your files you need to drop your files to the drop zone and click to upload button.</strong> </p>
             <img src={createLinkImg} alt='create-link-img' className='w-100 create-link-img' />
           </div>
         </div>

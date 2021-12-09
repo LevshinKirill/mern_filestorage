@@ -1,10 +1,12 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const formidableMiddleware = require('express-formidable')
 require('dotenv').config()
 
-app.use(express.json())
 app.use(cors())
+app.use(express.json())
+app.use(formidableMiddleware({}))
 app.use('/api/link/', require('./routes/link.routes'))
 
 const PORT = process.env.PORT || 8000
