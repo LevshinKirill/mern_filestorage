@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone'
 import { FileCard } from './FileCard'
 
 const Dropzone = ({ setAcceptedFiles }) => {
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive, isDragAccept } = useDropzone({ maxFiles: 2 })
+  const { acceptedFiles, getRootProps, getInputProps, isDragActive, isDragAccept } = useDropzone({ maxFiles: 3 })
 
   useEffect(() => {
     if (setAcceptedFiles) {

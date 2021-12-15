@@ -5,7 +5,7 @@ import { Dropzone } from './Dropzone'
 import createLinkImg from '../images/create-link-img.png'
 import { toast } from 'react-toastify'
 
-const CreateLinkComponent = () => {
+const CreateLink = ({setLink}) => {
   const [acceptedFiles, setAcceptedFiles] = useState([])
   const { request, loading } = useHttp()
 
@@ -16,8 +16,9 @@ const CreateLinkComponent = () => {
       acceptedFiles.forEach(file => {
         formData.append('files', file)
       })
-      const fetched = await request(`http://localhost:8000/api/link/create`, 'POST', formData, {})
-      if (fetched.message) {
+      const fetched = await request(`http://localhost:8000/link/create`, 'POST', formData, {})
+      if (fetched.link) {
+        setLink(fetched.link)
         toast(fetched.message)
       }
     } catch (err) {
@@ -36,7 +37,7 @@ const CreateLinkComponent = () => {
           <form className='col-xl-6 p-3' onSubmit={createLinkHandler}>
             <Dropzone setAcceptedFiles={setAcceptedFiles} />
             <div className='d-grid gap-2 mt-3'>
-              <button className='btn btn-primary btn-large' type='submit'>Upload</button>
+              <button className='btn btn-primary btn-lg' type='submit'>Upload</button>
             </div>
           </form>
           <div className='col-xl-6 p-3'>
@@ -51,5 +52,5 @@ const CreateLinkComponent = () => {
 }
 
 export {
-  CreateLinkComponent
+  CreateLink
 }

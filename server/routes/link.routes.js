@@ -1,15 +1,14 @@
 const Router = require('express')
 const router = new Router()
+const upload = require('../upload')
+const linkController = require('../controllers/link.controller')
 
-router.post('/create', async (req, res) => {
-  try {
-    res.json({
-      message: 'Link has been created'
-    })
-  } catch (e) {
-    console.log(e)
-    res.status(500).json({ message: 'Server error' })
-  }
+router.post('/create', upload.array('files', 3), async (req, res) => {
+  linkController.createLink(req, res)
+})
+
+router.get('/:code', async (req, res) => {
+  linkController.getFilesByLink(req, res)
 })
 
 module.exports = router

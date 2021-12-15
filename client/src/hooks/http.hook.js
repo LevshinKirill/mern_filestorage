@@ -1,12 +1,12 @@
 
 
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 
 export const useHttp = () => {
   const [loading, setLoading] = useState(false)
 
-  const request = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
+  const request = async (url, method = 'GET', body = null, headers = {}) => {
     setLoading(true)
     try {
       const response = await fetch(url, { method, headers, body })
@@ -21,7 +21,7 @@ export const useHttp = () => {
       toast(e.message)
       throw e
     }
-  }, [])
-  
+  }
+
   return { loading, request }
 }
