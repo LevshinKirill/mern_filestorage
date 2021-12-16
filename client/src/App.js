@@ -13,7 +13,7 @@ const App = () => {
       <ToastContainer />
       <div className='d-flex justify-content-center align-items-center vh-100'>
         {!link && <CreateLink setLink={setLink} />}
-        {link && <Link link={link} />}
+        {link && <Link link={link} setLink={setLink} />}
       </div>
     </div>
   )

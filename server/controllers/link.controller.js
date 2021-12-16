@@ -9,7 +9,7 @@ class LinkController {
       const link = new Link({
         code: shortid.generate()
       })
-      req.files.forEach(async (file) => {
+      for (const file of req.files) {
         const fileRecord = new File({
           name: file.filename,
           originalName: file.originalname,
@@ -18,7 +18,7 @@ class LinkController {
         await fileRecord.save()
         link.files.push(fileRecord)
         await link.save()
-      })
+      }
       res.json({
         message: 'Link has been created',
         link: `${req.headers.host}\/link/${link.code}`
