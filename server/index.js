@@ -9,7 +9,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/link/', require('./routes/link.routes'))
 
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 80
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, '../client', 'build')))
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const start = async () => {
   try {
-    await mongoose.connect(`mongodb://localhost:27017/mern_filestorage`)
+     await mongoose.connect(`mongodb://localhost:27017/mern_filestorage`)
     app.listen(PORT, () => console.log(`server started on port ${PORT}`))
   } catch (e) {
     console.log(e)
