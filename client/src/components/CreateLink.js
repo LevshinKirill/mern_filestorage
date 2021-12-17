@@ -16,7 +16,7 @@ const CreateLink = ({setLink}) => {
       acceptedFiles.forEach(file => {
         formData.append('files', file)
       })
-      const fetched = await request(`http://localhost:80/link/create`, 'POST', formData, {})
+      const fetched = await request(process.env.REACT_APP_SERVER_URI, 'POST', formData, {})
       if (fetched.link) {
         setLink(fetched.link)
         toast(fetched.message)
