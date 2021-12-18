@@ -10,6 +10,10 @@ My pet project to test my skills and make a cool file storage app like firefox s
 
 You can view the site by URI: http://129.159.195.136/
 
+<br />
+
+![demo.gif](demo/demo.gif)
+
 ## How to start the application
 
 To get started, you need:
