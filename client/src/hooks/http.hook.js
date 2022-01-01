@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
@@ -16,10 +14,10 @@ export const useHttp = () => {
       }
       setLoading(false)
       return data
-    } catch (e) {
+    } catch (err) {
       setLoading(false)
-      toast(e.message)
-      throw e
+      toast(err.message)
+      throw err
     }
   }
 

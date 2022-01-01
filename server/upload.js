@@ -6,11 +6,14 @@ const storage = multer.diskStorage({
   destination: async (req, file, callBack) => {
     callBack(null, 'uploads/')
   },
-  filename:  async (req, file, callBack) => {
-    callBack(null, shortid.generate() + path.extname(file.originalname)) 
+  filename: async (req, file, callBack) => {
+    callBack(null, shortid.generate() + path.extname(file.originalname))
   }
 })
 
-const upload = multer({ storage: storage })
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1024 * 1024 * 50 }
+})
 
 module.exports = upload

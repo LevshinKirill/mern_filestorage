@@ -5,7 +5,7 @@ import { Dropzone } from './Dropzone'
 import createLinkImg from '../images/create-link-img.png'
 import { toast } from 'react-toastify'
 
-const CreateLink = ({setLink}) => {
+const CreateLink = ({ setLink }) => {
   const [acceptedFiles, setAcceptedFiles] = useState([])
   const { request, loading } = useHttp()
 
@@ -42,7 +42,13 @@ const CreateLink = ({setLink}) => {
           </form>
           <div className='col-xl-6 p-3'>
             <h2>Simple, private file sharing</h2>
-            <p>The app lets you share files with a link that automatically expires.<strong> To share your files you need to drop your files to the drop zone and click to upload button.</strong> </p>
+            <p>
+              The app lets you share files with a link that automatically expires.
+              To share your files you need to drop your files to the drop zone and click to upload button.
+              <strong>
+                Maximum number of files 3. Maximum file size 50 MB.
+              </strong>
+            </p>
             <img src={createLinkImg} alt='create-link-img' className='w-100 create-link-img' />
           </div>
         </div>

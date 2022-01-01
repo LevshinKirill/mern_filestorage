@@ -1,15 +1,44 @@
 import { useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { FileCard } from './FileCard'
+import { toast } from 'react-toastify'
 
 const Dropzone = ({ setAcceptedFiles }) => {
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive, isDragAccept } = useDropzone({ maxFiles: 3 })
+  const maxFileSize = 1024 * 1024 * 50
+
+  const fileSizeValidator = (file) => {
+    if (file.size > maxFileSize) {
+      return {
+        message: `file is larger than ${maxFileSize} bytes`
+      }
+    }
+    return null
+  }
+
+  const {
+    acceptedFiles,
+    fileRejections,
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isDragAccept,
+  } = useDropzone({
+    maxFiles: 3,
+    validator: fileSizeValidator
+  })
 
   useEffect(() => {
     if (setAcceptedFiles) {
       setAcceptedFiles(acceptedFiles)
     }
   }, [acceptedFiles, setAcceptedFiles])
+
+  useEffect(() => {
+    fileRejections.map(({ file, errors }) => (
+      errors.forEach(error => {
+        toast(`${file.name} - ${error.message}`)
+      })))
+  }, [fileRejections])
 
   const acceptedFileItems = acceptedFiles.map(file => (
     <FileCard file={file} key={file.path} />

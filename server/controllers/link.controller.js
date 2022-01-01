@@ -2,10 +2,14 @@ const shortid = require('shortid')
 const Link = require('../models/Link')
 const File = require('../models/File')
 const zip = require('express-zip')
+const upload = require('../upload')
 
 class LinkController {
   createLink = async (req, res) => {
     try {
+      if (req.files.length < 1) {
+        throw new Error('No files detected')
+      }
       const link = new Link({
         code: shortid.generate()
       })
@@ -23,9 +27,9 @@ class LinkController {
         message: 'Link has been created',
         link: `${req.headers.host}\/link/${link.code}`
       })
-    } catch (e) {
-      console.log(e)
-      res.status(500).json({ message: 'Server error' })
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ message: err.message })
     }
   }
 
@@ -40,9 +44,9 @@ class LinkController {
         })
       })
       res.zip(files)
-    } catch (e) {
-      console.log(e)
-      res.status(500).json({ message: 'Server error' })
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ message: err.message })
     }
   }
 }
