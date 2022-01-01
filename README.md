@@ -6,11 +6,11 @@
 
 My pet project to test my skills and make a cool file storage app like firefox send 
 
+### About host
+
+The project work on free vps hosting Oracle free tier. You can view the site by URI: http://129.159.195.136/
+
 ### Demo
-
-You can view the site by URI: http://129.159.195.136/
-
-<br />
 
 ![demo.gif](demo/demo.gif)
 
